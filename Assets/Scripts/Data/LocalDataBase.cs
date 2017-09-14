@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 本地数据表中的单条数据的基类
+/// 本地数据表中的单条数据的抽象基类
 /// </summary>
 public abstract class LocalDataBase
 {
