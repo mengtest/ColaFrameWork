@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using UnityEngine;
 
 
@@ -15,7 +18,13 @@ public static class MD5Helper
     /// <returns></returns>
     public static string MD5EncryptFile(string filePath)
     {
-        
+        byte[] retVal;
+        using (FileStream fs = new FileStream(filePath, FileMode.Open))
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            retVal = md5.ComputeHash(fs);
+        }
+        return retVal.ToHex("x2");
     }
 
 
@@ -26,6 +35,9 @@ public static class MD5Helper
     /// <returns></returns>
     public static string MD5EncryptString(string originStr)
     {
-        
+        byte[] retVal;
+        MD5 md5 = new MD5CryptoServiceProvider();
+        retVal = md5.ComputeHash(Encoding.UTF8.GetBytes(originStr));
+        return retVal.ToHex("x2");
     }
 }
