@@ -2,15 +2,87 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameEventMgr : MonoBehaviour {
+public class GameEventMgr
+{
+    /// <summary>
+    /// 存储Hander的字典
+    /// </summary>
+    private Dictionary<int, List<IEventHandler>> handlerDic;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private static GameEventMgr instance = null;
+
+    private GameEventMgr()
+    {
+        handlerDic = new Dictionary<int, List<IEventHandler>>();
+    }
+
+    public static GameEventMgr GetInstance()
+    {
+        if (null == instance)
+        {
+            instance = new GameEventMgr();
+        }
+        return instance;
+    }
+
+    /// <summary>
+    /// 对外提供的注册监听的接口
+    /// </summary>
+    /// <param name="handler"></param>监听者(处理回调)
+    /// <param name="eventTypes"></param>想要监听的事件类型
+    public void RegisterHandler(IEventHandler handler, params EventType[] eventTypes)
+    {
+        for (int i = 0; i < eventTypes.Length; i++)
+        {
+            RegisterHandler(eventTypes[i],handler);
+        }
+    }
+
+    /// <summary>
+    /// 内部实际调用的注册监听的方法
+    /// </summary>
+    /// <param name="type"></param>要监听的事件类型
+    /// <param name="handler"></param>监听者(处理回调)
+    private void RegisterHandler(EventType type, IEventHandler handler)
+    {
+        if (null != handler)
+        {
+            if (!handlerDic.ContainsKey((int) type))
+            {
+                handlerDic.Add((int)type,new List<IEventHandler>());
+            }
+            if (!handlerDic[(int)type].Contains(handler))
+            {
+                handlerDic[(int)type].Add(handler);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 反注册事件监听的接口
+    /// </summary>
+    /// <param name="handler"></param>
+    public void UnRegisterHandler(IEventHandler handler)
+    {
+        
+    }
+
+    /// <summary>
+    /// 反注册事件监听的接口
+    /// </summary>
+    /// <param name="handler"></param>
+    /// <param name="types"></param>
+    public void UnRegisterHandler(IEventHandler handler, params EventType[] types)
+    {
+        
+    }
+
+    /// <summary>
+    /// 分发事件
+    /// </summary>
+    /// <param name="gameEvent"></param>想要分发的事件
+    public void DispatchEvent(GameEvent gameEvent)
+    {
+        
+    }
 }
