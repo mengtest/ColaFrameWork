@@ -59,7 +59,7 @@ public class GameEventMgr
     }
 
     /// <summary>
-    /// 反注册事件监听的接口
+    /// 反注册事件监听的接口，对所有类型的事件移除指定的监听
     /// </summary>
     /// <param name="handler"></param>
     public void UnRegisterHandler(IEventHandler handler)
@@ -68,7 +68,7 @@ public class GameEventMgr
     }
 
     /// <summary>
-    /// 反注册事件监听的接口
+    /// 反注册事件监听的接口，移除指定类型事件的监听
     /// </summary>
     /// <param name="handler"></param>
     /// <param name="types"></param>

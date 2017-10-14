@@ -53,12 +53,12 @@ public static class ByteHelper
         return Encoding.Default.GetString(bytes, index, count);
     }
 
-    public static string Utf8ToStr(this byte[] bytes)
+    public static string UTF8ToStr(this byte[] bytes)
     {
         return Encoding.UTF8.GetString(bytes);
     }
 
-    public static string Utf8ToStr(this byte[] bytes, int index, int count)
+    public static string UTF8ToStr(this byte[] bytes, int index, int count)
     {
         return Encoding.UTF8.GetString(bytes, index, count);
     }

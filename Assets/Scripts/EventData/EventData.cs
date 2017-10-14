@@ -33,3 +33,22 @@ public class GameEvent
 {
     
 }
+
+/// <summary>
+/// 事件的类型
+/// </summary>
+public enum EventType : byte
+{
+    /// <summary>
+    /// 系统的消息
+    /// </summary>
+    SystemMsg = 0,
+    /// <summary>
+    /// 来自服务器推送的消息
+    /// </summary>
+    ServerMsg = 1,
+    /// <summary>
+    /// 跳转系统的消息
+    /// </summary>
+    ChangeSys = 2,
+}
