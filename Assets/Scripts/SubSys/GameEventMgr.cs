@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventType = ColaFrame.EventType;
 
 public class GameEventMgr
 {
@@ -64,7 +65,15 @@ public class GameEventMgr
     /// <param name="handler"></param>
     public void UnRegisterHandler(IEventHandler handler)
     {
-        
+        using (var enumerator = handlerDic.GetEnumerator())
+        {
+            List<IEventHandler> list;
+            while (enumerator.MoveNext())
+            {
+                list = enumerator.Current.Value;
+                list.Remove(handler);
+            }
+        }
     }
 
     /// <summary>
@@ -74,7 +83,16 @@ public class GameEventMgr
     /// <param name="types"></param>
     public void UnRegisterHandler(IEventHandler handler, params EventType[] types)
     {
-        
+        EventType type;
+        for (int i = 0; i < types.Length; i++)
+        {
+            type = types[i];
+            if (handlerDic.ContainsKey((int) type) && handlerDic[(int) type].Contains(handler))
+            {
+                handlerDic[(int) type].Remove(handler);
+            }
+        }
+
     }
 
     /// <summary>
