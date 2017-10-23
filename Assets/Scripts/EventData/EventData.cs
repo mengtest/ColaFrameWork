@@ -31,7 +31,7 @@ public class MsgHandlerData
 /// </summary>
 public class GameEvent
 {
-    
+    public EventType EventType { get; set; }
 }
 
 

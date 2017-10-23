@@ -101,6 +101,13 @@ public class GameEventMgr
     /// <param name="gameEvent"></param>想要分发的事件
     public void DispatchEvent(GameEvent gameEvent)
     {
-        
+        bool eventHandle = false;
+
+        List<IEventHandler> handlers;
+        if (null != gameEvent && handlerDic.TryGetValue((int) gameEvent.EventType, out handlers))
+        {
+            
+        }
+
     }
 }
