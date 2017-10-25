@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventType = ColaFrame.EventType;
@@ -106,7 +107,32 @@ public class GameEventMgr
         List<IEventHandler> handlers;
         if (null != gameEvent && handlerDic.TryGetValue((int) gameEvent.EventType, out handlers))
         {
-            
+            for (int i = 0; i < handlers.Count; i++)
+            {
+                try
+                {
+                    eventHandle = handlers[i].HandleMessage(gameEvent) || eventHandle;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                }
+            }
+
+            if (!eventHandle)
+            {
+                if (null != gameEvent)
+                {
+                    switch (gameEvent.EventType)
+                    {
+                        case EventType.ServerMsg:
+                            break;
+                        default:
+                            Debug.LogError("消息未处理，类型："+gameEvent.EventType);
+                            break;
+                    }
+                }
+            }
         }
 
     }

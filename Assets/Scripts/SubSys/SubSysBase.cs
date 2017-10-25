@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventType = ColaFrame.EventType;
 
 
 /// <summary>
@@ -23,7 +25,7 @@ public abstract class SubSysBase : IEventHandler
     /// <summary>
     /// 消息-回调函数字典，接收到消息后调用字典中的回调方法
     /// </summary>
-    protected Dictionary<string, MsgHander> msgHanderDic;
+    protected Dictionary<string, MsgHandler> msgHanderDic;
 
     /// <summary>
     /// 构造函数
@@ -38,6 +40,7 @@ public abstract class SubSysBase : IEventHandler
     public virtual void EnterSys()
     {
 
+        RegisterHander();
     }
 
     /// <summary>
@@ -54,7 +57,9 @@ public abstract class SubSysBase : IEventHandler
     /// </summary>
     public virtual void ExitSys()
     {
-
+        UnRegisterHander();
+        Resources.UnloadUnusedAssets();
+        GC.Collect();
     }
 
     /// <summary>
@@ -62,7 +67,8 @@ public abstract class SubSysBase : IEventHandler
     /// </summary>
     protected virtual void RegisterHander()
     {
-
+        msgHanderDic = null;
+        GameEventMgr.GetInstance().RegisterHandler(this,EventType.ServerMsg);
     }
 
     /// <summary>
@@ -70,7 +76,13 @@ public abstract class SubSysBase : IEventHandler
     /// </summary>
     protected virtual void UnRegisterHander()
     {
+        GameEventMgr.GetInstance().UnRegisterHandler(this);
 
+        if (null != msgHanderDic)
+        {
+            msgHanderDic.Clear();
+            msgHanderDic = null;
+        }
     }
 
     /// <summary>
@@ -80,7 +92,15 @@ public abstract class SubSysBase : IEventHandler
     /// <returns></returns>是否处理成功
     protected virtual bool HandleMessageImpl(GameEvent gameEvent)
     {
-
+        bool handled = false;
+        if (EventType.ServerMsg == gameEvent.EventType)
+        {
+            if (null != msgHanderDic)
+            {
+                
+            }
+        }
+        return handled;
     }
 
     /// <summary>
