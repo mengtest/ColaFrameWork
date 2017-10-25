@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using EventType = ColaFrame.EventType;
 
 /// <summary>
 /// 接收消息后触发的回调
 /// </summary>
 /// <param name="data"></param>
-public delegate void MsgHander(MsgHandlerData data);
+public delegate void MsgHandler(EventData data);
 
 /// <summary>
 /// 事件处理器的接口
@@ -21,7 +21,7 @@ public interface IEventHandler
 /// <summary>
 /// 事件消息传递的数据
 /// </summary>
-public class MsgHandlerData
+public class EventData
 {
     
 }
