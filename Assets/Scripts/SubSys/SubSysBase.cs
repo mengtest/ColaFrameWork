@@ -97,7 +97,12 @@ public abstract class SubSysBase : IEventHandler
         {
             if (null != msgHanderDic)
             {
-                
+                EventData eventData=gameEvent.Para as EventData;
+                if (null != eventData && msgHanderDic.ContainsKey(eventData.Cmd))
+                {
+                    msgHanderDic[eventData.Cmd](eventData);
+                    handled = true;
+                }
             }
         }
         return handled;
@@ -107,9 +112,21 @@ public abstract class SubSysBase : IEventHandler
     /// 是否处理了该消息的函数的实现
     /// </summary>
     /// <returns></returns>是否处理
-    protected virtual bool IsHandlerImpl(GameEvent gmaEvent)
+    protected virtual bool IsHandlerImpl(GameEvent gameEvent)
     {
-
+        bool handled = false;
+        if (EventType.ServerMsg == gameEvent.EventType)
+        {
+            if (null != msgHanderDic)
+            {
+                EventData eventData = gameEvent.Para as EventData;
+                if (null != eventData && msgHanderDic.ContainsKey(eventData.Cmd))
+                {
+                    handled = true;
+                }
+            }
+        }
+        return handled;
     }
 
 
