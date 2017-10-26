@@ -23,7 +23,8 @@ public interface IEventHandler
 /// </summary>
 public class EventData
 {
-    
+    public string Cmd;
+    public List<object> ParaList;
 }
 
 /// <summary>
@@ -31,7 +32,14 @@ public class EventData
 /// </summary>
 public class GameEvent
 {
+    /// <summary>
+    /// 事件类型
+    /// </summary>
     public EventType EventType { get; set; }
+    /// <summary>
+    /// 携带参数
+    /// </summary>
+    public object Para { get; set; }
 }
 
 
