@@ -1,16 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeHelper : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public static class TimeHelper
+{
+    private static int timerID;
+    private static Dictionary<int, Action> timerFunDic;
 }
