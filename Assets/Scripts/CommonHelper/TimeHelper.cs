@@ -30,6 +30,18 @@ public static class TimeHelper
     public static int SetTimer(Action action, float time, bool isIgnoreTimeScale)
     {
         int tmpTimerID = int.MaxValue;
+        if (null != action && time > 0.0f)
+        {
+            tmpTimerID = GetTimerID();
+            GameObject timerTmpObj = new GameObject();
+            GameObject.DontDestroyOnLoad(timerTmpObj);
+            timerTmpObj.name = tmpTimerID.ToString();
+
+            TimerBehavior timerBehavior = timerTmpObj.AddComponent<TimerBehavior>();
+            timerFuncDic.Add(tmpTimerID,action);
+            timerObjects.Add(tmpTimerID,timerTmpObj);
+            timerBehavior.BeginTimer(TimerEndEvent,tmpTimerID,time,isIgnoreTimeScale);
+        }
         return tmpTimerID;
     }
 
@@ -53,7 +65,19 @@ public static class TimeHelper
     /// <returns></returns>
     public static int SetRepeatTimer(Action action, float time, bool isIgnoreTimeScale)
     {
-        int tmpTimerID = int.MaxValue;
+        int tmpTimerID = -1;
+        if (null != action && time > 0)
+        {
+            tmpTimerID = GetTimerID();
+            GameObject timerTmpObj = new GameObject();
+            GameObject.DontDestroyOnLoad(timerTmpObj);
+            timerTmpObj.name = tmpTimerID.ToString();
+
+            TimerBehavior timerBehavior = timerTmpObj.AddComponent<TimerBehavior>();
+            timerFuncDic.Add(tmpTimerID,action);
+            timerObjects.Add(tmpTimerID,timerTmpObj);
+            timerBehavior.BeginRepeatTimer(RepeatTimerEvent,timerID,time,isIgnoreTimeScale);
+        }
         return tmpTimerID;
     }
 
