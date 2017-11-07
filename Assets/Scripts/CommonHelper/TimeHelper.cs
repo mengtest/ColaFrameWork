@@ -98,7 +98,17 @@ public static class TimeHelper
     /// <param name="killID"></param>
     public static void KillTimer(int killID)
     {
+        if (timerFuncDic.ContainsKey(killID))
+        {
+            timerFuncDic.Remove(killID);
+        }
 
+        if (timerObjects.ContainsKey(killID))
+        {
+            GameObject timerTmpObj = timerObjects[killID];
+            timerObjects.Remove(killID);
+            GameObject.Destroy(timerTmpObj);
+        }
     }
 
     private static int GetTimerID()
