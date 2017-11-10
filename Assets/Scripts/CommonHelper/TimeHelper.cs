@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+/// <summary>
+/// 计时器助手类
+/// </summary>
 public static class TimeHelper
 {
     private static int timerID;
     private static Dictionary<int, Action> timerFuncDic;
     private static Dictionary<int, GameObject> timerObjects;
+    private static string timerName = "Timer";
 
     /// <summary>
     /// 静态构造函数
@@ -35,12 +39,12 @@ public static class TimeHelper
             tmpTimerID = GetTimerID();
             GameObject timerTmpObj = new GameObject();
             GameObject.DontDestroyOnLoad(timerTmpObj);
-            timerTmpObj.name = tmpTimerID.ToString();
+            timerTmpObj.name = timerName + tmpTimerID.ToString();
 
             TimerBehavior timerBehavior = timerTmpObj.AddComponent<TimerBehavior>();
-            timerFuncDic.Add(tmpTimerID,action);
-            timerObjects.Add(tmpTimerID,timerTmpObj);
-            timerBehavior.BeginTimer(TimerEndEvent,tmpTimerID,time,isIgnoreTimeScale);
+            timerFuncDic.Add(tmpTimerID, action);
+            timerObjects.Add(tmpTimerID, timerTmpObj);
+            timerBehavior.BeginTimer(TimerEndEvent, tmpTimerID, time, isIgnoreTimeScale);
         }
         return tmpTimerID;
     }
@@ -71,12 +75,12 @@ public static class TimeHelper
             tmpTimerID = GetTimerID();
             GameObject timerTmpObj = new GameObject();
             GameObject.DontDestroyOnLoad(timerTmpObj);
-            timerTmpObj.name = tmpTimerID.ToString();
+            timerTmpObj.name = timerName + tmpTimerID.ToString();
 
             TimerBehavior timerBehavior = timerTmpObj.AddComponent<TimerBehavior>();
-            timerFuncDic.Add(tmpTimerID,action);
-            timerObjects.Add(tmpTimerID,timerTmpObj);
-            timerBehavior.BeginRepeatTimer(RepeatTimerEvent,timerID,time,isIgnoreTimeScale);
+            timerFuncDic.Add(tmpTimerID, action);
+            timerObjects.Add(tmpTimerID, timerTmpObj);
+            timerBehavior.BeginRepeatTimer(RepeatTimerEvent, tmpTimerID, time, isIgnoreTimeScale);
         }
         return tmpTimerID;
     }

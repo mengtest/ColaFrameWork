@@ -59,7 +59,7 @@ public class TimerBehavior : MonoBehaviour
             repeatTimerEvent = timerListener;
             timerID = tmpTimerID;
 
-            InvokeRepeating("EndRepeatTimer", 0.01f, time * GetTimeScale(isInoreTimeScale));
+            InvokeRepeating("EndRepeatTimer", time * GetTimeScale(isInoreTimeScale), time * GetTimeScale(isInoreTimeScale));
         }
     }
 
