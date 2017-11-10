@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventType = ColaFrame.EventType;
 
+/// <summary>
+/// 事件消息管理中心
+/// </summary>
 public class GameEventMgr
 {
     /// <summary>

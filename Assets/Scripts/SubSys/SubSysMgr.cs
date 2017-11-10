@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventType = ColaFrame.EventType;
 
+/// <summary>
+/// 系统管理控制类
+/// </summary>
 public class SubSysMgr : IEventHandler
 {
     /// <summary>
