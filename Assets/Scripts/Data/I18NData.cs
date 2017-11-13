@@ -7,9 +7,14 @@ using UnityEngine;
 /// </summary>
 public class I18NData : LocalDataBase
 {
+    public string desStr;
+
     public override void InitWithStr(string strData, char splitChar = ',')
     {
-        throw new System.NotImplementedException();
+        string[] strs = strData.Split(splitChar);
+
+        id = this.GetInt(strs[0]);
+        desStr = strs[1];
     }
 }
 
@@ -18,6 +23,8 @@ public class I18NData : LocalDataBase
 /// </summary>
 public class I18NDataMap : ScriptableObject,ILocalDataMapBase
 {
+    public Dictionary<int,I18NData> I18NDataList = new Dictionary<int, I18NData>();
+
     public void SetMapCsv(string[] rows)
     {
         throw new System.NotImplementedException();
