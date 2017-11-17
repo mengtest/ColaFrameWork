@@ -7,5 +7,14 @@ using UnityEngine;
 /// </summary>
 public class ResourceMgr
 {
+    private static ResourceMgr instance;
 
+    public static ResourceMgr GetInstance()
+    {
+        if (null == instance)
+        {
+            instance= new ResourceMgr();
+        }
+        return instance;
+    }
 }
