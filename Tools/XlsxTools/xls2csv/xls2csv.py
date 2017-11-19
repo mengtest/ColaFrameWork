@@ -113,13 +113,13 @@ def savaToCSV(_file, _list, _path):
             content = content + vstr
         content = content + C_END
 
-    #生成文件后缀
-    fname = os.path.splitext(_file)
+    #生成文件后缀 
+    fname = os.path.basename(_file).split('.')
     filename = fname[0] + ".csv"
 
     #写文件
     if len(filename)>0 and len(content)>0:
-        #filename = OUT_PATH + "/" + filename
+        filename = OUT_PATH + "/" + filename
         print u"输出文件:" + filename
         file_object = open(filename, 'w')
         file_object.write(content)
