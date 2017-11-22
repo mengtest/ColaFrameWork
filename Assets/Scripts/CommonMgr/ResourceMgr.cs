@@ -8,13 +8,26 @@ using UnityEngine;
 public class ResourceMgr
 {
     private static ResourceMgr instance;
+    private ResourceLoader resourceLoader;
 
     public static ResourceMgr GetInstance()
     {
         if (null == instance)
         {
-            instance= new ResourceMgr();
+            instance = new ResourceMgr();
         }
         return instance;
     }
+
+    private ResourceMgr()
+    {
+        GameObject resourceMgrObj = new GameObject();
+        GameObject.DontDestroyOnLoad(resourceMgrObj);
+
+        resourceLoader = resourceMgrObj.AddComponent<ResourceLoader>();
+
+    }
+
+
+    public void LoadText(string path,string fileName,)
 }
