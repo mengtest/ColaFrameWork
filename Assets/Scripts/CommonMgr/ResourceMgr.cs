@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 /// <summary>
@@ -25,9 +27,26 @@ public class ResourceMgr
         GameObject.DontDestroyOnLoad(resourceMgrObj);
 
         resourceLoader = resourceMgrObj.AddComponent<ResourceLoader>();
-
     }
 
 
-    public void LoadText(string path,string fileName,)
+    public void LoadText(string path, string fileName, Action<string, string> callback)
+    {
+        resourceLoader.LoadAsync<TextAsset>(path,(obj,name)=>
+        {
+            TextAsset textAsset = obj as TextAsset;
+            if(null!=callback)
+            callback(fileName, textAsset.text);
+        });
+    }
+
+    public void LoadText(string path, string fileName, Action<string, byte[]> callback)
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+
+#endif
+        var bytes = File.ReadAllBytes(path);
+        if (null!=callback)
+            callback(fileName, bytes);
+    }
 }
