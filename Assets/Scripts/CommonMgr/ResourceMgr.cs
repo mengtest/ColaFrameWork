@@ -29,7 +29,12 @@ public class ResourceMgr
         resourceLoader = resourceMgrObj.AddComponent<ResourceLoader>();
     }
 
-
+    /// <summary>
+    /// 加载文本
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="fileName"></param>
+    /// <param name="callback"></param>
     public void LoadText(string path, string fileName, Action<string, string> callback)
     {
         resourceLoader.LoadAsync<TextAsset>(path,(obj,name)=>
@@ -45,6 +50,7 @@ public class ResourceMgr
 #if UNITY_ANDROID && !UNITY_EDITOR
 
 #endif
+        //支持从Resources以外目录读取
         var bytes = File.ReadAllBytes(path);
         if (null!=callback)
             callback(fileName, bytes);
