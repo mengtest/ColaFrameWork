@@ -78,13 +78,21 @@
     <Compile Include="Assets\Scripts\AutoInject\AutoInject.cs" />
     <Compile Include="Assets\Scripts\AutoInject\AutoInjectAttribute.cs" />
     <Compile Include="Assets\Scripts\CommonHelper\ByteHelper.cs" />
+    <Compile Include="Assets\Scripts\CommonHelper\CommonHelper.cs" />
+    <Compile Include="Assets\Scripts\CommonHelper\I18NHelper.cs" />
     <Compile Include="Assets\Scripts\CommonHelper\MD5Helper.cs" />
+    <Compile Include="Assets\Scripts\CommonHelper\ResourceLoader.cs" />
     <Compile Include="Assets\Scripts\CommonHelper\TimeHelper.cs" />
+    <Compile Include="Assets\Scripts\CommonHelper\TimerBehavior.cs" />
+    <Compile Include="Assets\Scripts\CommonMgr\GameEventMgr.cs" />
+    <Compile Include="Assets\Scripts\CommonMgr\LocalDataMgr.cs" />
+    <Compile Include="Assets\Scripts\CommonMgr\ResourceMgr.cs" />
+    <Compile Include="Assets\Scripts\CommonMgr\SubSysMgr.cs" />
+    <Compile Include="Assets\Scripts\Data\I18NData.cs" />
     <Compile Include="Assets\Scripts\Data\LocalDataBase.cs" />
     <Compile Include="Assets\Scripts\EventData\EventData.cs" />
-    <Compile Include="Assets\Scripts\SubSys\GameEventMgr.cs" />
     <Compile Include="Assets\Scripts\SubSys\SubSysBase.cs" />
-    <Compile Include="Assets\Scripts\SubSys\SubSysMgr.cs" />
+    <Compile Include="Assets\Scripts\Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
