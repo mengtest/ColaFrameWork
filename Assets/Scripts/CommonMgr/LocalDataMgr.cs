@@ -150,7 +150,11 @@ public class LocalDataMgr
             //如果数据已经加载过，直接返回数据，否则懒加载数据集
             if (dataMap.ContainsKey(typeof(T)))
             {
-
+                if (null != dataMap[typeof(T)])
+                {
+                    return (T) dataMap[typeof(T)];
+                }
+                Debug.LogWarning(string.Format("LocalData 键%s对应的值为空！",typeof(T).ToString()));
             }
             else
             {
@@ -169,5 +173,11 @@ public class LocalDataMgr
     public static T GetLocalDataMap<T>() where T : class, ILocalDataMapBase
     {
         return GetInstance().GetDataMap<T>();
+    }
+
+
+    public void LoadConfigByName(string fileName, Action callback)
+    {
+        
     }
 }
