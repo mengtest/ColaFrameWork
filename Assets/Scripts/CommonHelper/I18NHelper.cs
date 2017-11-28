@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class I18NHelper{
+public class I18NHelper
+{
 
 }
