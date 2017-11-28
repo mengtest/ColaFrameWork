@@ -19,9 +19,14 @@ public class LocalDataMgr
     private Dictionary<Type, ILocalDataMapBase> dataMap = new Dictionary<Type, ILocalDataMapBase>();
 
     /// <summary>
-    /// 存储表格名称对应的解析类的字典(K:表名,V：解析类)
+    /// 存储表格名称对应的解析类的字典(K:表名,V：解析类),需手动填写
     /// </summary>
     private static readonly Dictionary<string, Type> name2TypeDic;
+
+    /// <summary>
+    /// 存储解析类对应表名的字典(K:解析类,V：表名)，只需要填写上面的name2Type即可，此字典程序会在运行时自动拷贝
+    /// </summary>
+    private static readonly Dictionary<Type, string> type2NameDic;
 
     /// 存储游戏一开始就需加载的表格名称对应的解析类的字典(K:表名,V：解析类)
     /// </summary>
@@ -45,7 +50,16 @@ public class LocalDataMgr
         name2TypeDic = new Dictionary<string, Type>()
         {
         };
+        type2NameDic = new Dictionary<Type, string>();
 
+        //运行时，将name2TypeDic中的数据拷贝过来，毋须手动填写
+        using (var enumerator = name2TypeDic.GetEnumerator())
+        {
+            while (enumerator.MoveNext())
+            {
+                type2NameDic.Add(enumerator.Current.Value, enumerator.Current.Key);
+            }
+        }
     }
 
     /// <summary>
@@ -108,7 +122,7 @@ public class LocalDataMgr
                 try
                 {
                     data.SetMapCsv(csvContent);
-                    dataMap.Add(dataType,data);
+                    dataMap.Add(dataType, data);
 
                 }
                 catch (Exception e)
@@ -118,13 +132,13 @@ public class LocalDataMgr
             }
             else
             {
-                Debug.LogWarning(string.Format("没有找到%s对应的解析类", fileName));
+                Debug.LogWarning(string.Format("没有找到{0}对应的解析类", fileName));
             }
 
         }
         else
         {
-            Debug.LogWarning(string.Format("读取%s文件数据为空！", fileName));
+            Debug.LogWarning(string.Format("读取{0}文件数据为空！", fileName));
         }
     }
 
@@ -152,13 +166,21 @@ public class LocalDataMgr
             {
                 if (null != dataMap[typeof(T)])
                 {
-                    return (T) dataMap[typeof(T)];
+                    return (T)dataMap[typeof(T)];
                 }
-                Debug.LogWarning(string.Format("LocalData 键%s对应的值为空！",typeof(T).ToString()));
+                Debug.LogWarning(string.Format("LocalData 键{0}对应的值为空！", typeof(T)));
             }
             else
             {
-                
+                if (type2NameDic.ContainsKey(typeof(T)))
+                {
+                    LoadConfigByName(type2NameDic[typeof(T)], TextLoadCallBack);
+                    return (T)dataMap[typeof(T)];
+                }
+                else
+                {
+                    Debug.LogWarning(string.Format("{0}类型的数据表不存在！", typeof(T)));
+                }
             }
         }
         Debug.LogWarning("LocalDataMapManager初始化错误！");
@@ -175,9 +197,13 @@ public class LocalDataMgr
         return GetInstance().GetDataMap<T>();
     }
 
-
-    public void LoadConfigByName(string fileName, Action callback)
+    /// <summary>
+    /// 加载指定文件名的数据
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <param name="callback"></param>
+    private void LoadConfigByName(string fileName, Action<string, string> callback)
     {
-        
+        ResourceMgr.GetInstance().LoadText(GetFilePath(fileName), fileName, TextLoadCallBack);
     }
 }
