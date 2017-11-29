@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommonHelper : MonoBehaviour {
+/// <summary>
+/// 通用工具类
+/// 提供一些常用功能的接口
+/// </summary>
+public class CommonHelper
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    /// <summary>
+    /// 通过ID获取国际化文字
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static string GetText(int id)
+    {
+        return I18NHelper.GetInstance().GetI18NText(id);
+    }
 }

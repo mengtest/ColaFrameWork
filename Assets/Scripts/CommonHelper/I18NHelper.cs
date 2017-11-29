@@ -47,7 +47,7 @@ public class I18NHelper
         {
             Debug.LogWarning("国际化表格加载失败！");
         }
-        return null;
+        return string.Empty;
     }
 
     /// <summary>
