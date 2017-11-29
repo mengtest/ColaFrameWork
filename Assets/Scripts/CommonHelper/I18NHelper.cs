@@ -7,15 +7,15 @@ using UnityEngine;
 /// </summary>
 public class I18NHelper
 {
-    private I18NHelper instance;
-    private I18NDataMap i18NDataMap;
+    private static I18NHelper instance;
+    private static I18NDataMap i18NDataMap;
 
     private I18NHelper()
     {
         i18NDataMap = LocalDataMgr.GetLocalDataMap<I18NDataMap>();
     }
 
-    public I18NHelper GetInstance()
+    public static I18NHelper GetInstance()
     {
         if (null == instance)
         {
@@ -29,7 +29,7 @@ public class I18NHelper
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public string GetText(int id)
+    public string GetI18NText(int id)
     {
         if (null != i18NDataMap)
         {
@@ -48,6 +48,16 @@ public class I18NHelper
             Debug.LogWarning("国际化表格加载失败！");
         }
         return null;
+    }
+
+    /// <summary>
+    /// 根据ID获取对应的国际化文字(静态方法，方便调用)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static string GetText(int id)
+    {
+        return GetInstance().GetI18NText(id);
     }
 
     /// <summary>
