@@ -77,6 +77,11 @@ public class LocalDataMgr
                     ResourceMgr.GetInstance().LoadText(GetFilePath(enumerator.Current.Key), enumerator.Current.Key, TextLoadCallBack);
                 }
             }
+
+            if (null != callback)
+            {
+                callback();
+            }
         }
     }
 
@@ -123,7 +128,6 @@ public class LocalDataMgr
                 {
                     data.SetMapCsv(csvContent);
                     dataMap.Add(dataType, data);
-
                 }
                 catch (Exception e)
                 {
@@ -149,7 +153,7 @@ public class LocalDataMgr
     /// <returns></returns>
     private string GetFilePath(string fileName)
     {
-        return "CsvData" + fileName;
+        return "CsvData/" + fileName;
     }
 
     /// <summary>
