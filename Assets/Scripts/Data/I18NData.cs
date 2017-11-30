@@ -11,6 +11,11 @@ public class I18NData : LocalDataBase
 
     public override void InitWithStr(string strData, char splitChar = ',')
     {
+        //去除最后的\r
+        if (strData.EndsWith("\r"))
+        {
+            strData = strData.Substring(0, strData.Length - 1);
+        }
         string[] strs = strData.Split(splitChar);
 
         id = this.GetInt(strs[0]);
@@ -35,7 +40,7 @@ public class I18NDataMap : ScriptableObject,ILocalDataMapBase
     {
         I18NDataList.Clear();
 
-        for (int i = 0; i < rows.Length; i++)
+        for (int i = 3; i < rows.Length; i++)
         {
             I18NData data = new I18NData();
             data.InitWithStr(rows[i]);
