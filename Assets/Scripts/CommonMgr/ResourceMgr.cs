@@ -30,7 +30,7 @@ public class ResourceMgr
     }
 
     /// <summary>
-    /// 加载文本同步
+    /// 加载文本(同步)
     /// </summary>
     /// <param name="path"></param>
     /// <param name="fileName"></param>
@@ -54,7 +54,7 @@ public class ResourceMgr
     }
 
     /// <summary>
-    /// 加载文本异步
+    /// 加载文本(异步)
     /// </summary>
     /// <param name="path"></param>
     /// <param name="fileName"></param>

@@ -18,19 +18,11 @@ public class Test : MonoBehaviour
 	{
         LocalDataMgr.GetInstance().LoadStartConfig(() =>
         {
-
+            text1.text = CommonHelper.GetText(10000);
+            text2.text = CommonHelper.GetText(10001);
+            text3.text = CommonHelper.GetText(10001);
         });
-	    StartCoroutine(ttt());
 	}
-
-    IEnumerator ttt()
-    {
-        yield return new WaitForSeconds(5f);
-        text1.text = CommonHelper.GetText(10000);
-        text2.text = CommonHelper.GetText(10001);
-        text3.text = CommonHelper.GetText(10002);
-    }
-	
 	// Update is called once per frame
 	void Update () {
 		
