@@ -178,7 +178,7 @@ public class LocalDataMgr
             {
                 if (type2NameDic.ContainsKey(typeof(T)))
                 {
-                    LoadConfigByName(type2NameDic[typeof(T)], TextLoadCallBack);
+                    LoadConfigByName(type2NameDic[typeof(T)]);
                     return (T)dataMap[typeof(T)];
                 }
                 else
@@ -202,11 +202,11 @@ public class LocalDataMgr
     }
 
     /// <summary>
-    /// 加载指定文件名的数据
+    /// 加载指定文件名的数据同步
     /// </summary>
     /// <param name="fileName"></param>
     /// <param name="callback"></param>
-    private void LoadConfigByName(string fileName, Action<string, string> callback)
+    private void LoadConfigByName(string fileName)
     {
         ResourceMgr.GetInstance().LoadText(GetFilePath(fileName), fileName, TextLoadCallBack);
     }
