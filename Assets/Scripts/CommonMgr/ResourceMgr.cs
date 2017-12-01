@@ -30,19 +30,16 @@ public class ResourceMgr
     }
 
     /// <summary>
-    /// 加载文本
+    /// 加载文本同步
     /// </summary>
     /// <param name="path"></param>
     /// <param name="fileName"></param>
     /// <param name="callback"></param>
     public void LoadText(string path, string fileName, Action<string, string> callback)
     {
-        resourceLoader.LoadAsync<TextAsset>(path,(obj,name)=>
-        {
-            TextAsset textAsset = obj as TextAsset;
-            if(null!=callback)
+        TextAsset textAsset = resourceLoader.Load<TextAsset>(path);
+        if (null != callback)
             callback(fileName, textAsset.text);
-        });
     }
 
     public void LoadText(string path, string fileName, Action<string, byte[]> callback)
@@ -54,5 +51,21 @@ public class ResourceMgr
         var bytes = File.ReadAllBytes(path);
         if (null!=callback)
             callback(fileName, bytes);
+    }
+
+    /// <summary>
+    /// 加载文本异步
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="fileName"></param>
+    /// <param name="callback"></param>
+    public void LoadTextAsync(string path, string fileName, Action<string, string> callback)
+    {
+        resourceLoader.LoadAsync<TextAsset>(path, (obj, name) =>
+        {
+            TextAsset textAsset = obj as TextAsset;
+            if (null != callback)
+                callback(fileName, textAsset.text);
+        });
     }
 }
