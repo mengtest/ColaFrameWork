@@ -32,6 +32,22 @@ public class LocalDataMgr
     /// </summary>
     private static readonly Dictionary<string, Type> startLoadDic;
 
+    /// <summary>
+    /// 要加载的表格的数量
+    /// </summary>
+    private int loadedConfigCount = -1;
+
+    /// <summary>
+    /// 同步异步标识
+    /// </summary>
+    //private bool isAsync = false;
+
+    /// <summary>
+    /// 资源加载完成后的回调
+    /// </summary>
+    //private Action callback;
+
+
     public static LocalDataMgr GetInstance()
     {
         if (null == instance)
@@ -63,11 +79,14 @@ public class LocalDataMgr
     }
 
     /// <summary>
-    /// 加载游戏一开始便需要加载的数据
+    /// 加载游戏一开始便需要加载的数据(同步)
     /// </summary>
     /// <param name="callback"></param>
     public void LoadStartConfig(Action callback)
     {
+        //this.callback = callback;
+        //this.isAsync = false;
+
         if (null != startLoadDic)
         {
             using (var enumerator = startLoadDic.GetEnumerator())
@@ -144,6 +163,19 @@ public class LocalDataMgr
         {
             Debug.LogWarning(string.Format("读取{0}文件数据为空！", fileName));
         }
+
+        //异步的时候才走这个，异步资源加载完成后执行回调
+        //if (isAsync)
+        //{
+        //    --loadedConfigCount;
+        //    if (0 == loadedConfigCount)
+        //    {
+        //        if (null != this.callback)
+        //        {
+        //            this.callback();
+        //        }
+        //    }
+        //}
     }
 
     /// <summary>
