@@ -50,6 +50,12 @@ public class CommonHelper
 
     }
 
+    /// <summary>
+    /// 根据路径实例化一个Prefab
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="parent"></param>
+    /// <returns></returns>
     public static GameObject InstantiateGoByPath(string path, GameObject parent)
     {
         ResourceMgr mgr = ResourceMgr.GetInstance();
@@ -64,5 +70,16 @@ public class CommonHelper
             Debug.LogWarning("检查资源管理器！");
             return null;
         }
+    }
+
+    /// <summary>
+    /// 根据一个预制实例化一个Prefab
+    /// </summary>
+    /// <param name="prefab"></param>
+    /// <param name="parent"></param>
+    /// <returns></returns>
+    public static GameObject InstantiateGoByPrefab(GameObject prefab, GameObject parent)
+    {
+        
     }
 }
