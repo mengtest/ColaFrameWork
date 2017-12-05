@@ -63,7 +63,7 @@ public class CommonHelper
 
         if (null != mgr)
         {
-            
+            prefab= mgr.
         }
         else
         {
