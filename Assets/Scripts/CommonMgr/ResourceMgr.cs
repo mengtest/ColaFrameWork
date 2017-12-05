@@ -3,6 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Object=UnityEngine.Object;
+
+/// <summary>
+/// 资源信息
+/// </summary>
+public class ResourceInfo
+{
+    /// <summary>
+    /// 实际的资源
+    /// </summary>
+    public Object Res;
+
+    /// <summary>
+    /// 资源的生存时间 -2 永久存在 -1 当前 大于0则按时间删除
+    /// </summary>
+    public int RemainSec;
+}
+
 
 /// <summary>
 /// 资源管理器
