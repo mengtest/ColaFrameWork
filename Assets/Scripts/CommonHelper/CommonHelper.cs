@@ -58,12 +58,12 @@ public class CommonHelper
     /// <returns></returns>
     public static GameObject InstantiateGoByPath(string path, GameObject parent)
     {
-        ResourceMgr mgr = ResourceMgr.GetInstance();
+        ResourceMgr resourceMgr = ResourceMgr.GetInstance();
         GameObject prefab = null;
 
-        if (null != mgr)
+        if (null != resourceMgr)
         {
-            prefab= mgr.
+            prefab= resourceMgr.
         }
         else
         {
