@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 通用工具类
@@ -27,7 +28,12 @@ public class CommonHelper
     /// <param name="callback"></param>
     public static void AddBtnMsg(GameObject go, Action<GameObject> callback)
     {
-        
+        Button button = go.GetComponent<Button>();
+        button.onClick.AddListener(() =>
+        {
+            callback(go);
+        });
+
     }
 
     /// <summary>
