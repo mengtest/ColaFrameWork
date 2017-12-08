@@ -48,18 +48,6 @@ public class CommonHelper
         {
             Debug.LogWarning("ButtonObj为空！");
         }
-
-
-    }
-
-    /// <summary>
-    /// 变更一个按钮的点击事件
-    /// </summary>
-    /// <param name="go"></param>
-    /// <param name="callback"></param>
-    public static void ChangeBtnMsg(GameObject go, Action<GameObject> callback)
-    {
-
     }
 
     /// <summary>
@@ -69,7 +57,22 @@ public class CommonHelper
     /// <param name="callback"></param>
     public static void RemoveBtnMsg(GameObject go, Action<GameObject> callback)
     {
-
+        if (null != go)
+        {
+            Button button = go.GetComponent<Button>();
+            if (null != button)
+            {
+                button.onClick.RemoveAllListeners();
+            }
+            else
+            {
+                Debug.LogWarning("该按钮没有挂载button组件！");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("ButtonObj为空！");
+        }
     }
 
     /// <summary>
