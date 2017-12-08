@@ -107,4 +107,48 @@ public class CommonHelper
     {
 
     }
+
+    /// <summary>
+    /// 给物体添加一个单一组件
+    /// </summary>
+    /// <typeparam name="T"></typeparam>组件的类型
+    /// <param name="go"></param>要添加组件的物体
+    /// <returns></returns>
+    public static T AddSingleComponent<T>(GameObject go) where T : Component
+    {
+        if (null != go)
+        {
+            T component = go.GetComponent<T>();
+            if (null == component)
+            {
+                component = go.AddComponent<T>();
+            }
+            return component;
+        }
+        Debug.LogWarning("要添加组件的物体为空！");
+        return null;
+    }
+
+    /// <summary>
+    /// 获取某个物体下对应名字的子物体上的某个类型的组件
+    /// </summary>
+    /// <typeparam name="T"></typeparam>组件的类型
+    /// <param name="go"></param>父物体
+    /// <param name="name"></param>子物体的名称
+    /// <returns></returns>
+    public static T GetComponentByName<T>(GameObject go, string name) where T : Component
+    {
+        T[] components = go.GetComponentsInChildren<T>(true);
+        if (components != null)
+        {
+            for (int i = 0; i < components.Length; i++)
+            {
+                if (components[i] != null && components[i].name == name)
+                {
+                    return components[i];
+                }
+            }
+        }
+        return null;
+    }
 }
