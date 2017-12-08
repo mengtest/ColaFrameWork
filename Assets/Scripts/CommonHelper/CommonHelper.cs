@@ -22,17 +22,33 @@ public class CommonHelper
     }
 
     /// <summary>
-    /// 给按钮添加点击事件
+    /// 给按钮添加点击事件(以后可以往这里添加点击声音)
     /// </summary>
     /// <param name="go"></param>
     /// <param name="callback"></param>
     public static void AddBtnMsg(GameObject go, Action<GameObject> callback)
     {
-        Button button = go.GetComponent<Button>();
-        button.onClick.AddListener(() =>
+        if (null != go)
         {
-            callback(go);
-        });
+            Button button = go.GetComponent<Button>();
+            if (null != button)
+            {
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() =>
+                {
+                    callback(go);
+                });
+            }
+            else
+            {
+                Debug.LogWarning("该按钮没有挂载button组件！");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("ButtonObj为空！");
+        }
+
 
     }
 
@@ -43,7 +59,7 @@ public class CommonHelper
     /// <param name="callback"></param>
     public static void ChangeBtnMsg(GameObject go, Action<GameObject> callback)
     {
-        
+
     }
 
     /// <summary>
@@ -69,7 +85,7 @@ public class CommonHelper
 
         if (null != resourceMgr)
         {
-            prefab= resourceMgr.
+            prefab = resourceMgr.
         }
         else
         {
@@ -86,6 +102,6 @@ public class CommonHelper
     /// <returns></returns>
     public static GameObject InstantiateGoByPrefab(GameObject prefab, GameObject parent)
     {
-        
+
     }
 }
