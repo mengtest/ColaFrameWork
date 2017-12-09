@@ -151,4 +151,18 @@ public class CommonHelper
         }
         return null;
     }
+
+    /// <summary>
+    /// 获取某个物体下子物体上所有的组件
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="go"></param>
+    /// <returns></returns>
+    public static T[] GetComponentsByName<T>(GameObject go)
+        where T : Component
+    {
+        T[] components = go.GetComponentsInChildren<T>(true);
+
+        return components;
+    }
 }
