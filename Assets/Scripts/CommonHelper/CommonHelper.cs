@@ -158,11 +158,58 @@ public class CommonHelper
     /// <typeparam name="T"></typeparam>
     /// <param name="go"></param>
     /// <returns></returns>
-    public static T[] GetComponentsByName<T>(GameObject go)
-        where T : Component
+    public static T[] GetComponentsByName<T>(GameObject go) where T : Component
     {
         T[] components = go.GetComponentsInChildren<T>(true);
 
         return components;
+    }
+
+    /// <summary>
+    /// 获取某个物体下对应名字的子物体
+    /// </summary>
+    /// <param name="go"></param>
+    /// <param name="childName"></param>
+    /// <returns></returns>
+    public static GameObject GetGameObjectByName(GameObject go, string childName)
+    {
+        GameObject ret = null;
+        if (go != null)
+        {
+            Transform[] childrenObj = go.GetComponentsInChildren<Transform>(true);
+            if (childrenObj != null)
+            {
+                for (int i = 0; i < childrenObj.Length; ++i)
+                {
+                    if ((childrenObj[i].name == childName))
+                    {
+                        ret = childrenObj[i].gameObject;
+                        break;
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="objInput"></param>
+    /// <param name="strFindName"></param>
+    /// <returns></returns>
+    public static List<GameObject> GetGameObjectsByName(GameObject objInput, string strFindName)
+    {
+        List<GameObject> list = new List<GameObject>();
+        Transform[] objChildren = objInput.GetComponentsInChildren<Transform>(true);
+        for (int i = 0; i < objChildren.Length; ++i)
+        {
+            if ((objChildren[i].name.Contains(strFindName)))
+            {
+                list.Add(objChildren[i].gameObject);
+            }
+        }
+
+        return list;
     }
 }
