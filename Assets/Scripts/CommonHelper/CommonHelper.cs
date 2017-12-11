@@ -105,7 +105,16 @@ public class CommonHelper
     /// <returns></returns>
     public static GameObject InstantiateGoByPrefab(GameObject prefab, GameObject parent)
     {
-
+        GameObject obj = GameObject.Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        obj.name = prefab.name;
+        if (null != parent)
+        {
+            obj.transform.parent = parent.transform;
+        }
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.identity;
+        obj.transform.localScale = Vector3.one;
+        return obj;
     }
 
     /// <summary>
@@ -166,7 +175,7 @@ public class CommonHelper
     }
 
     /// <summary>
-    /// 获取某个物体下对应名字的子物体
+    /// 获取某个物体下对应名字的子物体(如果有重名的，就返回第一个符合的)
     /// </summary>
     /// <param name="go"></param>
     /// <param name="childName"></param>
@@ -193,23 +202,22 @@ public class CommonHelper
     }
 
     /// <summary>
-    /// 
+    /// 获取某个物体下对应的名字的所有子物体
     /// </summary>
-    /// <param name="objInput"></param>
-    /// <param name="strFindName"></param>
+    /// <param name="go"></param>
+    /// <param name="childName"></param>
     /// <returns></returns>
-    public static List<GameObject> GetGameObjectsByName(GameObject objInput, string strFindName)
+    public static List<GameObject> GetGameObjectsByName(GameObject go, string childName)
     {
         List<GameObject> list = new List<GameObject>();
-        Transform[] objChildren = objInput.GetComponentsInChildren<Transform>(true);
+        Transform[] objChildren = go.GetComponentsInChildren<Transform>(true);
         for (int i = 0; i < objChildren.Length; ++i)
         {
-            if ((objChildren[i].name.Contains(strFindName)))
+            if ((objChildren[i].name.Contains(childName)))
             {
                 list.Add(objChildren[i].gameObject);
             }
         }
-
         return list;
     }
 }
