@@ -88,7 +88,8 @@ public class CommonHelper
 
         if (null != resourceMgr)
         {
-            prefab = resourceMgr.
+           // prefab = resourceMgr.
+            return prefab;
         }
         else
         {
