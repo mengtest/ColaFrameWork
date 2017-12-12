@@ -48,4 +48,54 @@ public class GUIHelper
             uiRootObj = new GameObject("Canvas");
         }
     }
+
+    /// <summary>
+    /// 返回UI画布的根节点
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetUIRootObj()
+    {
+        UGUICreate();
+        return uiRootObj;
+    }
+
+    /// <summary>
+    /// 返回相机节点
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetUICameraObj()
+    {
+        UGUICreate();
+        return uiCameraObj;
+    }
+
+    /// <summary>
+    /// 返回UI画布
+    /// </summary>
+    /// <returns></returns>
+    public Canvas GetUIRoot()
+    {
+        UGUICreate();
+        return uiRoot;
+    }
+
+    /// <summary>
+    /// 返回UI相机
+    /// </summary>
+    /// <returns></returns>
+    public Camera GetUICamera()
+    {
+        UGUICreate();
+        return uiCamera;
+    }
+
+    /// <summary>
+    /// 返回3D物体的根节点
+    /// </summary>
+    /// <returns></returns>
+    public GameObject Get3DRootObj()
+    {
+        UGUICreate();
+        return ui3DRootObj;
+    }
 }
