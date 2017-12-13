@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// GUI工具类
@@ -57,6 +58,25 @@ public class GUIHelper
             uiCamera.backgroundColor = Color.black;
             uiCamera.cullingMask = uiLayer;
             uiCamera.clearFlags = CameraClearFlags.Depth;
+
+            //使用2D相机
+            uiCamera.orthographicSize = 1.0f;
+            uiCamera.orthographic = true;
+            uiCamera.nearClipPlane = -1000f;
+            uiCamera.farClipPlane = 1000f;
+            //uiCameraObj.AddComponent<CameraAdapter>();
+
+            Canvas uguiRoot = uiRootObj.AddComponent<Canvas>();
+            uguiRoot.renderMode = RenderMode.ScreenSpaceCamera;
+            uguiRoot.worldCamera = uiCamera;
+
+            CanvasScaler canvasScaler = uiRootObj.AddComponent<CanvasScaler>();
+            canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+            canvasScaler.matchWidthOrHeight = 0;
+            canvasScaler.referenceResolution = new Vector2(1280,720);
+
+
         }
     }
 
