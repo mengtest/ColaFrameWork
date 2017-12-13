@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
@@ -76,6 +77,12 @@ public class GUIHelper
             canvasScaler.matchWidthOrHeight = 0;
             canvasScaler.referenceResolution = new Vector2(1280,720);
 
+            uiRootObj.AddComponent<GraphicRaycaster>();
+            GameObject eventSystem = new GameObject("EventSystem");
+            eventSystem.AddComponent<EventSystem>();
+            eventSystem.AddComponent<StandaloneInputModule>();
+
+            uiRoot = uguiRoot;
 
         }
     }
