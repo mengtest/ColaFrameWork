@@ -46,6 +46,17 @@ public class GUIHelper
             ui3DRootObj.layer = LayerMask.NameToLayer("UI_Model");
 
             uiRootObj = new GameObject("Canvas");
+            uiRootObj.transform.parent = rootObj.transform;
+            uiRootObj.layer = uiLayer;
+
+            uiCameraObj=new GameObject("UICamera");
+            uiCameraObj.layer = uiLayer;
+            uiCameraObj.transform.parent = uiRootObj.transform;
+            uiCamera=uiCameraObj.AddComponent<Camera>();
+            uiCamera.depth = 6;
+            uiCamera.backgroundColor = Color.black;
+            uiCamera.cullingMask = uiLayer;
+            uiCamera.clearFlags = CameraClearFlags.Depth;
         }
     }
 
