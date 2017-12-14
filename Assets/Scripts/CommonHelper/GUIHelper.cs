@@ -84,6 +84,14 @@ public class GUIHelper
 
             uiRoot = uguiRoot;
 
+            GameObject bgCameraObj = new GameObject("BackgroundCamera");
+            Camera bgCamera = bgCameraObj.AddComponent<Camera>();
+            bgCamera.depth = 0;
+            bgCamera.backgroundColor=Color.black;
+            bgCamera.orthographicSize = 1f;
+            bgCamera.orthographic = true;
+            bgCamera.cullingMask = LayerMask.GetMask("Nothing");
+            bgCamera.clearFlags=CameraClearFlags.SolidColor;
         }
     }
 
