@@ -76,12 +76,12 @@ public class CommonHelper
     }
 
     /// <summary>
-    /// 根据路径实例化一个Prefab
+    /// 根据id实例化一个Prefab
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="id"></param>
     /// <param name="parent"></param>
     /// <returns></returns>
-    public static GameObject InstantiateGoByPath(string path, GameObject parent)
+    public static GameObject InstantiateGoByPath(int id, GameObject parent)
     {
         ResourceMgr resourceMgr = ResourceMgr.GetInstance();
         GameObject prefab = null;
