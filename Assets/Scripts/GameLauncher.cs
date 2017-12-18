@@ -2,21 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameLauncher : MonoBehaviour {
+public class GameLauncher : MonoBehaviour
+{
+    private GameManager gameManager;
 
     void Awake()
     {
+        gameManager = GameManager.GetInstance();
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
     }
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start ()
+    {
+        StartCoroutine(InitGameCore());
+    }
+
+    void Update()
+    {
+        gameManager.Update(Time.deltaTime);
+    }
+
+    private void LateUpdate()
+    {
+        gameManager.LateUpdate(Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        gameManager.FixedUpdate(Time.fixedDeltaTime);
+    }
 
 
+    private void OnApplicationQuit()
+    {
+        gameManager.OnApplicationQuit();
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        gameManager.OnApplicationPause(pause);
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        gameManager.OnApplicationFocus(focus);
+    }
+
+    IEnumerator InitGameCore()
+    {
+        yield return new WaitForEndOfFrame();
+        gameManager.InitGameCore();
+    }
 }
