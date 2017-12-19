@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 游戏入口:游戏启动器类
+/// </summary>
 public class GameLauncher : MonoBehaviour
 {
     private GameManager gameManager;

@@ -35,7 +35,7 @@ public class FPSHelper : MonoBehaviour {
                                                              + "  MonoHeapSize:" + GetMemoryMB(UnityEngine.Profiling.Profiler.GetMonoHeapSize())
                                                              + "  MonoUsedSize:" + GetMemoryMB(UnityEngine.Profiling.Profiler.GetMonoUsedSize())
         );
-        string version_str = GameClient.getClientVersion();
+        string version_str = GameClient.GetClientVersion();
         version_str = System.String.Format("版本号:{0}", version_str);
         GUI.Label(new Rect(0, 100, 200, 200), version_str);
         if (f_Fps > 50)
