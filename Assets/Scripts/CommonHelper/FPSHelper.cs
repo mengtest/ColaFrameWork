@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 显示游戏帧率/占用内存等信息的助手类
+/// </summary>
 public class FPSHelper : MonoBehaviour {
 
     public float f_UpdateInterval = 0.5F;

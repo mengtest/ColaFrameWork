@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 游戏核心管理中心
+/// </summary>
 public class GameManager
 {
 
