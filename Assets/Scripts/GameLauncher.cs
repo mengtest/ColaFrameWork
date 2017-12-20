@@ -16,6 +16,8 @@ public class GameLauncher : MonoBehaviour
         gameManager = GameManager.GetInstance();
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
+        DontDestroyOnLoad(gameObject);
+
 #if SHOW_FPS
         fpsHelperObj = new GameObject("FpsHelperObj");
         fpsHelper = fpsHelperObj.AddComponent<FPSHelper>();
