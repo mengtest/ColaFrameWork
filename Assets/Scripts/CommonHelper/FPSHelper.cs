@@ -5,23 +5,35 @@ using UnityEngine;
 /// <summary>
 /// 显示游戏帧率/占用内存等信息的助手类
 /// </summary>
-public class FPSHelper : MonoBehaviour {
+public class FPSHelper : MonoBehaviour
+{
+    /// <summary>
+    /// 计算的更新频率
+    /// </summary>
+    public float updateInterval = 0.5F;
 
-    public float f_UpdateInterval = 0.5F;
+    /// <summary>
+    /// 用来保存时间间隔
+    /// </summary>
+    private float lastInterval;
 
-    private float f_LastInterval;
+    /// <summary>
+    /// 记录帧数
+    /// </summary>
+    private int frames = 0;
 
-    private int i_Frames = 0;
-
-    private float f_Fps;
+    /// <summary>
+    /// 记录帧率
+    /// </summary>
+    private float fps;
 
     void Start()
     {
         //Application.targetFrameRate=60;
 
-        f_LastInterval = Time.realtimeSinceStartup;
+        lastInterval = Time.realtimeSinceStartup;
 
-        i_Frames = 0;
+        frames = 0;
     }
 
     void OnGUI()
@@ -35,14 +47,14 @@ public class FPSHelper : MonoBehaviour {
                                                              + "  MonoHeapSize:" + GetMemoryMB(UnityEngine.Profiling.Profiler.GetMonoHeapSize())
                                                              + "  MonoUsedSize:" + GetMemoryMB(UnityEngine.Profiling.Profiler.GetMonoUsedSize())
         );
-        string version_str = GameClient.GetClientVersion();
-        version_str = System.String.Format("版本号:{0}", version_str);
-        GUI.Label(new Rect(0, 100, 200, 200), version_str);
-        if (f_Fps > 50)
+        string versionStr = GameClient.GetClientVersion();
+        versionStr = System.String.Format("版本号:{0}", versionStr);
+        GUI.Label(new Rect(0, 100, 200, 200), versionStr);
+        if (fps > 50)
         {
             GUI.color = new Color(0, 1, 0);
         }
-        else if (f_Fps > 25)
+        else if (fps > 25)
         {
             GUI.color = new Color(1, 1, 0);
         }
@@ -51,7 +63,7 @@ public class FPSHelper : MonoBehaviour {
             GUI.color = new Color(1.0f, 0, 0);
         }
 
-        GUI.Label(new Rect(0, 50, 300, 300), "FPS:" + f_Fps.ToString("f2"));
+        GUI.Label(new Rect(0, 50, 300, 300), "FPS:" + fps.ToString("f2"));
 
     }
 
@@ -63,15 +75,15 @@ public class FPSHelper : MonoBehaviour {
 
     void Update()
     {
-        ++i_Frames;
+        ++frames;
 
-        if (Time.realtimeSinceStartup > f_LastInterval + f_UpdateInterval)
+        if (Time.realtimeSinceStartup > lastInterval + updateInterval)
         {
-            f_Fps = i_Frames / (Time.realtimeSinceStartup - f_LastInterval);
+            fps = frames / (Time.realtimeSinceStartup - lastInterval);
 
-            i_Frames = 0;
+            frames = 0;
 
-            f_LastInterval = Time.realtimeSinceStartup;
+            lastInterval = Time.realtimeSinceStartup;
         }
     }
 }
