@@ -8,15 +8,23 @@ using UnityEngine;
 public class GameLauncher : MonoBehaviour
 {
     private GameManager gameManager;
+    private GameObject fpsHelperObj;
+    private FPSHelper fpsHelper;
 
     void Awake()
     {
         gameManager = GameManager.GetInstance();
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
+#if SHOW_FPS
+        fpsHelperObj = new GameObject("FpsHelperObj");
+        fpsHelper = fpsHelperObj.AddComponent<FPSHelper>();
+        GameObject.DontDestroyOnLoad(fpsHelperObj);
+#endif
     }
+
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         StartCoroutine(InitGameCore());
     }
