@@ -221,4 +221,13 @@ public class CommonHelper
         }
         return list;
     }
+
+    /// <summary>
+    /// 获取资源管理器
+    /// </summary>
+    /// <returns></returns>
+    public ResourceMgr GetResourceMgr()
+    {
+        return ResourceMgr.GetInstance();
+    }
 }
