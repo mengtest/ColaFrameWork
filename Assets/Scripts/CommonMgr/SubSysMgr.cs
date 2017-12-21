@@ -59,4 +59,19 @@ public class SubSysMgr : IEventHandler
     {
         throw new System.NotImplementedException();
     }
+
+    /// <summary>
+    /// 更新系统
+    /// </summary>
+    /// <param name="deltaTime"></param>
+    public void Update(float deltaTime)
+    {
+        using (var enumerator = subSysList.GetEnumerator())
+        {
+            while (enumerator.MoveNext())
+            {
+                enumerator.Current.Value.UpdateSys(deltaTime);
+            }
+        }
+    }
 }

@@ -10,6 +10,16 @@ public class GameManager
 
     private static GameManager instance;
 
+    /// <summary>
+    /// Launcher的Obj
+    /// </summary>
+    private GameObject gameLauncherObj;
+
+    /// <summary>
+    /// 系统管理器
+    /// </summary>
+    private SubSysMgr subSysMgr;
+
     private GameManager()
     {
 
@@ -29,8 +39,13 @@ public class GameManager
     /// </summary>
     public void InitGameCore(GameObject gameObject)
     {
-        
+        gameLauncherObj = gameObject;
+        LocalDataMgr.GetInstance().LoadStartConfig(() =>
+        {
+            
+        });
     }
+
 
     /// <summary>
     /// 模拟 Update
@@ -38,7 +53,10 @@ public class GameManager
     /// <param name="deltaTime"></param>
     public void Update(float deltaTime)
     {
-       
+        if (null != subSysMgr)
+        {
+            subSysMgr.Update(deltaTime);
+        }
     }
 
     /// <summary>
