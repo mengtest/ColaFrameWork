@@ -27,7 +27,7 @@ public class GameManager
     /// <summary>
     /// 初始化游戏核心
     /// </summary>
-    public void InitGameCore()
+    public void InitGameCore(GameObject gameObject)
     {
         
     }

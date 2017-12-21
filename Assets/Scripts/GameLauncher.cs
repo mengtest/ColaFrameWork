@@ -65,6 +65,6 @@ public class GameLauncher : MonoBehaviour
     IEnumerator InitGameCore()
     {
         yield return new WaitForEndOfFrame();
-        gameManager.InitGameCore();
+        gameManager.InitGameCore(gameObject);
     }
 }
