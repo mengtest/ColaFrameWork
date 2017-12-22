@@ -113,4 +113,27 @@ public class LevelMgr : MonoBehaviour
         }
     }
 
+    public void LoadLevelAsync(string levelName, OnAdditiveLevelLoaded onLevelLoaded)
+    {
+        
+    }
+
+    private IEnumerator LoadTargetLevelAsync(string levelName, OnAdditiveLevelLoaded onLevelLoaded)
+    {
+        if (SceneManager.GetActiveScene().name == levelName)
+        {
+            Debug.LogWarning(string.Format("名为{0}的场景已经加载过了！", levelName));
+        }
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Single);
+        while (!asyncOperation.isDone)
+        {
+            yield return asyncOperation;
+        }
+        currentScene = SceneManager.GetActiveScene();
+        yield return new WaitForEndOfFrame();
+        if (null != onLevelLoaded)
+        {
+            onLevelLoaded(levelName);
+        }
+    }
 }
