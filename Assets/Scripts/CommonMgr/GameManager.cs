@@ -20,6 +20,11 @@ public class GameManager
     /// </summary>
     private SubSysMgr subSysMgr;
 
+    /// <summary>
+    /// 场景/关卡管理器
+    /// </summary>
+    private LevelMgr levelMgr;
+
     private GameManager()
     {
 
@@ -44,6 +49,8 @@ public class GameManager
         {
             
         });
+
+        gameObject.AddComponent<LevelMgr>();
     }
 
 
