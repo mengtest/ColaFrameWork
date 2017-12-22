@@ -26,10 +26,11 @@ public class LevelMgr : MonoBehaviour
 
     public Scene currentScene;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    // Use this for initialization
+    void Start()
+    {
+
+    }
 
     /// <summary>
     /// 以异步-叠加方式加载场景
@@ -55,9 +56,61 @@ public class LevelMgr : MonoBehaviour
         {
             yield return asyncOperation;
         }
-        currentScene=SceneManager.GetActiveScene();
-        onAdditiveLevelLoaded(levelName);
+        currentScene = SceneManager.GetActiveScene();
+        if (null != onAdditiveLevelLoaded)
+        {
+            onAdditiveLevelLoaded(levelName);
+        }
         Scene scene = SceneManager.GetSceneByName(levelName);
         SceneManager.SetActiveScene(scene);
     }
+
+    /// <summary>
+    /// 以同步的方式加载场景
+    /// </summary>
+    /// <param name="levelName"></param>
+    public void LoadLevel(string levelName)
+    {
+        if (SceneManager.GetActiveScene().name == levelName)
+        {
+            Debug.LogWarning(string.Format("名为{0}的场景已经加载过了！", levelName));
+        }
+        SceneManager.LoadScene(levelName);
+        currentScene = SceneManager.GetActiveScene();
+    }
+
+    /// <summary>
+    /// 以异步-单独的方式加载场景
+    /// </summary>
+    /// <param name="levelIndex"></param>
+    /// <param name="onLevelLoaded"></param>
+    public void LoadLevelAsync(int levelIndex, OnLevelLoaded onLevelLoaded)
+    {
+        StartCoroutine(LoadTargetLevelAsync(levelIndex, onLevelLoaded));
+    }
+
+    /// <summary>
+    /// 以异步-单独的方式加载场景(携程调用)
+    /// </summary>
+    /// <param name="levelIndex"></param>
+    /// <param name="onLevelLoaded"></param>
+    /// <returns></returns>
+    private IEnumerator LoadTargetLevelAsync(int levelIndex, OnLevelLoaded onLevelLoaded)
+    {
+        if (SceneManager.GetActiveScene().buildIndex == levelIndex)
+        {
+            Debug.LogWarning(string.Format("索引为{0}的场景已经加载过了！", levelIndex));
+        }
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(levelIndex, LoadSceneMode.Single);
+        while (!asyncOperation.isDone)
+        {
+            yield return asyncOperation;
+        }
+        currentScene = SceneManager.GetActiveScene();
+        if (null != onLevelLoaded)
+        {
+            onLevelLoaded(levelIndex);
+        }
+    }
+
 }
