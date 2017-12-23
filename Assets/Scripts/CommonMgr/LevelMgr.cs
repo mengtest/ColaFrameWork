@@ -113,11 +113,22 @@ public class LevelMgr : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 以异步-单独的方式加载场景
+    /// </summary>
+    /// <param name="levelName"></param>
+    /// <param name="onLevelLoaded"></param>
     public void LoadLevelAsync(string levelName, OnAdditiveLevelLoaded onLevelLoaded)
     {
-        
+        StartCoroutine(LoadTargetLevelAsync(levelName, onLevelLoaded));
     }
 
+    /// <summary>
+    /// 以异步-单独的方式加载场景(携程调用)
+    /// </summary>
+    /// <param name="levelName"></param>
+    /// <param name="onLevelLoaded"></param>
+    /// <returns></returns>
     private IEnumerator LoadTargetLevelAsync(string levelName, OnAdditiveLevelLoaded onLevelLoaded)
     {
         if (SceneManager.GetActiveScene().name == levelName)
