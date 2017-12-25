@@ -31,4 +31,6 @@ public abstract class UIBase : IViewBase
     /// UI界面的层级
     /// </summary>
     public int Layer { get; set; }
+
+    public bool IsShow { get { return Panel.activeSelf; } }
 }
